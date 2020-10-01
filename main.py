@@ -1,6 +1,6 @@
 import cv2 as cv
 import numpy as np
-
+import matplotlib.pyplot as plt
 
 
 #Write down conf, nms thresholds,inp width/height
@@ -54,7 +54,7 @@ def postprocess(frame, outs):
                 boxes.append([left, top, width, height])
 
     indices = cv.dnn.NMSBoxes (boxes,confidences, confThreshold, nmsThreshold )
-
+    
     indices = cv.dnn.NMSBoxes(boxes, confidences, confThreshold, nmsThreshold)
     for i in indices:
         i = i[0]
@@ -127,7 +127,7 @@ while cv.waitKey(1) < 0:
     net.setInput(blob)
     outs = net.forward (getOutputsNames(net))
 
-
+    print("Hi, these are the objects")
     postprocess (frame, outs)
 
     #show the image
